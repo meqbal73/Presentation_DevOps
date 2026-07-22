@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عرض DevOps البرمجي النيون التفاعلي</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #070913;
+            --card-bg: rgba(18, 22, 41, 0.75);
+            --card-border: rgba(0, 243, 255, 0.2);
+            --neon-cyan: #00f3ff;
+            --neon-purple: #9d4edf;
+            --neon-pink: #ff007f;
+            --neon-green: #00ff87;
+            --text-main: #f0f6fc;
+            --text-muted: #8b949e;
+            --font-family: 'Cairo', sans-serif;
+            --font-code: 'Fira Code', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-family);
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            direction: rtl;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(0, 243, 255, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(157, 78, 223, 0.08) 0%, transparent 40%),
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+        }
+
+        /* Presentation Container */
+        .presentation-container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        /* Top Header Navigation */
+        header {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 243, 255, 0.1);
+            background: rgba(7, 9, 19, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+
+        .logo-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+        }
+
+        .logo-title .badge {
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+            color: #000;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 900;
+        }
+
+        .slide-counter {
+            font-family: var(--font-code);
+            font-size: 1rem;
+            color: var(--neon-purple);
+            background: rgba(157, 78, 223, 0.1);
+            padding: 6px 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(157, 78, 223, 0.3);
+        }
+
+        /* Slide viewport */
+        .slides-wrapper {
+            flex: 1;
+            position: relative;
+            width: 100%;
+            height: calc(100vh - 140px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .slide {
+            position: absolute;
+            width: 90%;
+            max-width: 1200px;
+            max-height: 85vh;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(30px) scale(0.98);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Typography & Components */
+        h1.slide-title {
+            font-size: 2.8rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, var(--neon-cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(0, 243, 255, 0.3);
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        p.slide-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+            line-height: 1.8;
+        }
+
+        /* Neon Cards */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .glass-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 25px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+            opacity: 0.5;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 12px 40px 0 rgba(0, 243, 255, 0.15);
+        }
+
+        .glass-card.purple::before {
+            background: linear-gradient(90deg, transparent, var(--neon-purple), transparent);
+        }
+
+        .glass-card.purple:hover {
+            border-color: var(--neon-purple);
+            box-shadow: 0 12px 40px 0 rgba(157, 78, 223, 0.15);
+        }
+
+        .glass-card.green::before {
+            background: linear-gradient(90deg, transparent, var(--neon-green), transparent);
+        }
+
+        .glass-card.green:hover {
+            border-color: var(--neon-green);
+            box-shadow: 0 12px 40px 0 rgba(0, 255, 135, 0.15);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .card-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: rgba(0, 243, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            color: var(--neon-cyan);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .card-desc {
+            font-size: 1rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* Metric Big Numbers */
+        .stat-card {
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .stat-number {
+            font-size: 3.8rem;
+            font-weight: 900;
+            font-family: var(--font-code);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .stat-cyan {
+            color: var(--neon-cyan);
+            text-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
+        }
+
+        .stat-green {
+            color: var(--neon-green);
+            text-shadow: 0 0 20px rgba(0, 255, 135, 0.5);
+        }
+
+        .stat-pink {
+            color: var(--neon-pink);
+            text-shadow: 0 0 20px rgba(ff, 0, 127, 0.5);
+        }
+
+        /* Infinity Loop Concept Visual */
+        .infinity-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .loop-side {
+            flex: 1;
+            min-width: 300px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .loop-side.dev {
+            border-right: 4px solid var(--neon-cyan);
+        }
+
+        .loop-side.ops {
+            border-right: 4px solid var(--neon-purple);
+        }
+
+        .loop-steps {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .loop-steps li {
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.05rem;
+        }
+
+        .step-num {
+            font-family: var(--font-code);
+            font-weight: bold;
+            color: var(--neon-cyan);
+        }
+
+        /* Timeline / Pipeline */
+        .pipeline-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .pipeline-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 20px;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .pipeline-badge {
+            background: var(--neon-cyan);
+            color: #000;
+            font-weight: 800;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        /* Neon Table */
+        .neon-table-wrapper {
+            overflow-x: auto;
+            margin-top: 25px;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+        }
+
+        table.neon-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: right;
+            background: var(--card-bg);
+        }
+
+        table.neon-table th {
+            background: rgba(0, 243, 255, 0.1);
+            color: var(--neon-cyan);
+            padding: 16px 20px;
+            font-size: 1.1rem;
+            border-bottom: 2px solid rgba(0, 243, 255, 0.2);
+        }
+
+        table.neon-table td {
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            font-size: 1rem;
+        }
+
+        table.neon-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        /* Footer Controls */
+        footer {
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(0, 243, 255, 0.1);
+            background: rgba(7, 9, 19, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+
+        .nav-btn {
+            background: rgba(0, 243, 255, 0.1);
+            color: var(--neon-cyan);
+            border: 1px solid var(--neon-cyan);
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-family: var(--font-family);
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn:hover {
+            background: var(--neon-cyan);
+            color: #000;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            border-color: var(--text-muted);
+            color: var(--text-muted);
+            background: transparent;
+            box-shadow: none;
+        }
+
+        .progress-bar-container {
+            flex: 1;
+            max-width: 400px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            margin: 0 30px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 8.33%;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
+            transition: width 0.3s ease;
+        }
+
+        /* Highlight text */
+        .highlight {
+            color: var(--neon-cyan);
+            font-weight: 700;
+        }
+
+        .highlight-purple {
+            color: var(--neon-purple);
+            font-weight: 700;
+        }
+
+        .highlight-green {
+            color: var(--neon-green);
+            font-weight: 700;
+        }
+
+        /* Code block badge */
+        .code-tag {
+            font-family: var(--font-code);
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: var(--neon-cyan);
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            h1.slide-title { font-size: 2rem; }
+            p.slide-subtitle { font-size: 1rem; }
+            header, footer { padding: 12px 20px; }
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+            .progress-bar-container { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="presentation-container">
+    <!-- Header -->
+    <header>
+        <div class="logo-title">
+            <span>عرض DEVOPS البرمجي</span>
+            <span class="badge">النيون التفاعلي</span>
+        </div>
+        <div class="slide-counter" id="slideCounter">01 / 12</div>
+    </header>
+
+    <!-- Slides Viewport -->
+    <main class="slides-wrapper">
+
+        <!-- Slide 1: Introduction -->
+        <section class="slide active">
+            <h1 class="slide-title">ما هي منهجية DevOps؟</h1>
+            <p class="slide-subtitle">دليل مبسط يوضح كيف تدمج الشركات بين التطوير والتشغيل لبناء برمجيات سريعة، خالية من الأخطاء، وآمنة للغاية.</p>
+            <div class="grid-2" style="max-width: 900px; margin: 30px auto 0 auto;">
+                <div class="glass-card">
+                    <div class="card-header">
+                        <div class="card-icon">⚡</div>
+                        <div class="card-title">تطوير أسرع</div>
+                    </div>
+                    <div class="card-desc">إطلاق الميزات والحلول للمستخدمين خلال ساعات بدلاً من أشهر، مع ضمان أعلى مستويات الاستقرار.</div>
+                </div>
+                <div class="glass-card purple">
+                    <div class="card-header">
+                        <div class="card-icon">🤝</div>
+                        <div class="card-title">ثقافة تعاونية</div>
+                    </div>
+                    <div class="card-desc">إزالة الحواجز بين المبرمجين وفرق التشغيل ليعمل الجميع كفريق واحد بمسؤولية مشتركة.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 2: Old vs New Paradigm -->
+        <section class="slide">
+            <h1 class="slide-title">الفكرة بساطة: فريق واحد بدل فريقين</h1>
+            <p class="slide-subtitle">التحول من الجزر المعزولة إلى المسؤولية والتكامل المشترك</p>
+            <div class="grid-2">
+                <div class="glass-card" style="border-right: 4px solid var(--neon-pink);">
+                    <div class="card-header">
+                        <div class="card-icon" style="color: var(--neon-pink); border-color: rgba(255,0,127,0.3); background: rgba(255,0,127,0.1);">🛑</div>
+                        <div class="card-title">الطريقة القديمة (المعزولة)</div>
+                    </div>
+                    <div class="card-desc">
+                        المطورون يكتبون الكود بسرعة ويرمونه لفريق التشغيل، وفريق التشغيل يرفض التحديثات خوفاً من تعطل السيرفرات والخدمة.
+                    </div>
+                </div>
+                <div class="glass-card green" style="border-right: 4px solid var(--neon-green);">
+                    <div class="card-header">
+                        <div class="card-icon" style="color: var(--neon-green); border-color: rgba(0,255,135,0.3); background: rgba(0,255,135,0.1);">✨</div>
+                        <div class="card-title">طريقة DevOps الحديثة</div>
+                    </div>
+                    <div class="card-desc">
+                        المطورون وفريق التشغيل يعملون كـ <span class="highlight-green">فريق واحد</span> منذ اليوم الأول. يتشاركون المسئولية والهدف لضمان السرعة والاستقرار.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 3: DevOps Continuous Loop -->
+        <section class="slide">
+            <h1 class="slide-title">حلقة التراكم المستمر (DevOps Loop)</h1>
+            <p class="slide-subtitle">الـ DevOps ليس مشروعاً ينتهي، بل هو حلقة دائرية مستمرة تنقسم لنصفين متكاملين:</p>
+            <div class="infinity-container">
+                <div class="loop-side dev">
+                    <div class="card-header">
+                        <div class="card-icon">💻</div>
+                        <div class="card-title">1. جانب التطوير (Dev)</div>
+                    </div>
+                    <ul class="loop-steps">
+                        <li><span class="step-num">01</span> تخطيط الميزات (Plan)</li>
+                        <li><span class="step-num">02</span> كتابة الكود (Code)</li>
+                        <li><span class="step-num">03</span> بناء التطبيق (Build)</li>
+                        <li><span class="step-num">04</span> اختباره آلياً (Test)</li>
+                    </ul>
+                </div>
+                <div class="loop-side ops">
+                    <div class="card-header">
+                        <div class="card-icon" style="color: var(--neon-purple);">🚀</div>
+                        <div class="card-title">2. جانب التشغيل (Ops)</div>
+                    </div>
+                    <ul class="loop-steps">
+                        <li><span class="step-num" style="color: var(--neon-purple);">05</span> تجهيز النسخة (Release)</li>
+                        <li><span class="step-num" style="color: var(--neon-purple);">06</span> نشرها للسيرفرات (Deploy)</li>
+                        <li><span class="step-num" style="color: var(--neon-purple);">07</span> تشغيلها (Operate)</li>
+                        <li><span class="step-num" style="color: var(--neon-purple);">08</span> مراقبتها فورياً (Monitor)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 4: Automation Metrics -->
+        <section class="slide">
+            <h1 class="slide-title">لماذا نحتاج إلى الأتمتة البرمجية؟</h1>
+            <p class="slide-subtitle">الأتمتة هي المحرك الأساسي الذي يمنح الشركات السرعة والموثوقية العالية</p>
+            <div class="grid-2" style="max-width: 950px; margin: 20px auto 0 auto;">
+                <div class="glass-card stat-card">
+                    <div class="stat-number stat-cyan">+208x</div>
+                    <div class="card-title" style="margin-bottom: 12px;">سرعة إطلاق الميزات</div>
+                    <div class="card-desc">بدلاً من الانتظار شهوراً، تُطلق الشركات التحديثات والحلول الجديدة للعملاء أسبوعياً أو يومياً بكل سهولة.</div>
+                </div>
+                <div class="glass-card stat-card green">
+                    <div class="stat-number stat-green">-7x</div>
+                    <div class="card-title" style="margin-bottom: 12px;">انخفاض نسبة الأخطاء</div>
+                    <div class="card-desc">الاختبارات الآلية تكتشف المشاكل وتصلحها قبل أن تصل للمستخدم النهائي، مما يضمن استقرار الخدمة.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: CI/CD Pipeline -->
+        <section class="slide">
+            <h1 class="slide-title">ما هو خط أنبوب CI/CD Pipeline؟</h1>
+            <p class="slide-subtitle">المسار الآلي الذي يعبره الكود من جهاز المبرمج حتى يصل يد المستخدم</p>
+            <div class="pipeline-container">
+                <div class="pipeline-step">
+                    <span class="pipeline-badge">1. التكامل المستمر (CI)</span>
+                    <div>
+                        <div class="card-title" style="font-size: 1.1rem; margin-bottom: 5px;">مثل الفحص الذاتي</div>
+                        <div class="card-desc">بمجرد كتابة المطور للكود، يقوم النظام بفحصه واختباره تلقائياً للتأكد أنه سليم ولا يفسد البرنامج.</div>
+                    </div>
+                </div>
+                <div class="pipeline-step" style="border-color: rgba(157, 78, 223, 0.3);">
+                    <span class="pipeline-badge" style="background: var(--neon-purple); color: #fff;">2. التسليم المستمر (CD)</span>
+                    <div>
+                        <div class="card-title" style="font-size: 1.1rem; margin-bottom: 5px;">التغليف والتجهيز</div>
+                        <div class="card-desc">يتم تجميع التطبيق السليم وتجهيزه في حزمة جاهزة للإطلاق في أي وقت بنقرة زر واحدة.</div>
+                    </div>
+                </div>
+                <div class="pipeline-step" style="border-color: rgba(0, 255, 135, 0.3);">
+                    <span class="pipeline-badge" style="background: var(--neon-green); color: #000;">3. النشر المستمر (CD)</span>
+                    <div>
+                        <div class="card-title" style="font-size: 1.1rem; margin-bottom: 5px;">الإطلاق التلقائي</div>
+                        <div class="card-desc">إرسال التحديث فوراً إلى سيرفرات الشركة الحية ليعمل أمام المستخدمين مباشرة دون تدخل بشري.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6: IaC -->
+        <section class="slide">
+            <h1 class="slide-title">البنية التحتية كأكواد (IaC)</h1>
+            <p class="slide-subtitle">إدارة الخوادم والشبكات من خلال ملفات برمجية قابلة للتكرار والتطوير</p>
+            <div class="glass-card purple" style="margin-bottom: 20px;">
+                <div class="card-header">
+                    <div class="card-icon" style="color: var(--neon-purple);">📝</div>
+                    <div class="card-title">المفهوم البسيط</div>
+                </div>
+                <div class="card-desc" style="font-size: 1.1rem;">
+                    بدلاً من الدخول يدوياً وضبط السيرفرات والشبكات لعدة ساعات، نكتب مواصفات السيرفر المطلوب في <span class="code-tag">ملف نصي برمجي</span>.
+                </div>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <div class="card-header">
+                        <div class="card-icon">⚡</div>
+                        <div class="card-title">سرعة فائقة</div>
+                    </div>
+                    <div class="card-desc">بناء خوادم سحابية كاملة خلال ثوانٍ بضغطة زر واحدة بدون أخطاء إعداد يدوية.</div>
+                </div>
+                <div class="glass-card green">
+                    <div class="card-header">
+                        <div class="card-icon">🔄</div>
+                        <div class="card-title">تطابق تام</div>
+                    </div>
+                    <div class="card-desc">نسخ ونقل بيئة العمل بأكملها بدون أي اختلاف بين أجهزة المطورين وبيئة الإنتاج الحية.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 7: DevOps Tools -->
+        <section class="slide">
+            <h1 class="slide-title">أشهر الأدوات المستخدمة في DevOps</h1>
+            <p class="slide-subtitle">المنظومة التكنولوجية التي تمكّن الأتمتة والسرعة</p>
+            <div class="grid-3">
+                <div class="glass-card">
+                    <div class="card-header">
+                        <div class="card-icon">📦</div>
+                        <div class="card-title">حفظ الأكواد والنسخ</div>
+                    </div>
+                    <div style="margin-bottom: 10px;"><span class="code-tag">Git</span> <span class="code-tag">GitHub</span> <span class="code-tag">GitLab</span></div>
+                    <div class="card-desc">حفظ التعديلات والتنسيق بين المبرمجين للتحكم في حركة الكود وإدارة الإصدارات.</div>
+                </div>
+                <div class="glass-card purple">
+                    <div class="card-header">
+                        <div class="card-icon" style="color: var(--neon-purple);">🐳</div>
+                        <div class="card-title">الحاويات (Containers)</div>
+                    </div>
+                    <div style="margin-bottom: 10px;"><span class="code-tag">Docker</span> <span class="code-tag">Kubernetes</span></div>
+                    <div class="card-desc">تغليف التطبيق بملف خفيف ليعمل فوراً على أي سيرفر بنفس الكفاءة بدون مشاكل البيئة.</div>
+                </div>
+                <div class="glass-card green">
+                    <div class="card-header">
+                        <div class="card-icon" style="color: var(--neon-green);">⚙️</div>
+                        <div class="card-title">الأتمتة والإدارة</div>
+                    </div>
+                    <div style="margin-bottom: 10px;"><span class="code-tag">Terraform</span> <span class="code-tag">Jenkins</span></div>
+                    <div class="card-desc">بناء خطوط الأنابيب وإدارة السيرفرات السحابية تلقائياً بدون أي جهد يدوي.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 8: DevSecOps -->
+        <section class="slide">
+            <h1 class="slide-title">الأمان أولاً (DevSecOps)</h1>
+            <p class="slide-subtitle">دمج الحماية والأمان كعنصر أساسي في كل مرحلة من مراحل تطوير البرمجيات</p>
+            <div class="glass-card" style="border-right: 4px solid var(--neon-cyan); margin-bottom: 25px;">
+                <div class="card-header">
+                    <div class="card-icon">🛡️</div>
+                    <div class="card-title">فلسفة Shift Left</div>
+                </div>
+                <div class="card-desc" style="font-size: 1.1rem;">
+                    بدل أن ننتظر حتى نهاية المشروع لفحص الثغرات الأمنية، نقوم بـ <span class="highlight">دمج الحماية والأمان داخل الكود أثناء كتابته</span>.
+                </div>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card purple">
+                    <div class="card-header">
+                        <div class="card-icon" style="color: var(--neon-purple);">🔍</div>
+                        <div class="card-title">اكتشاف آلي مبكر</div>
+                    </div>
+                    <div class="card-desc">اكتشاف الثغرات الأمنية وتسريب المفاتيح تلقائياً فور كتابة الكود وقبل نُشره.</div>
+                </div>
+                <div class="glass-card green">
+                    <div class="card-header">
+                        <div class="card-icon" style="color: var(--neon-green);">🔒</div>
+                        <div class="card-title">منتج محمي بالكامل</div>
+                    </div>
+                    <div class="card-desc">ضمان وصول منتج آمن ومحمي بالكامل للعملاء بدون أي اختراقات أو ثغرات مفاجئة.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 9: Comparison Table -->
+        <section class="slide">
+            <h1 class="slide-title">الفرق بين النظام القديم و DevOps</h1>
+            <p class="slide-subtitle">مقارنة شمولية تعكس حجم التحول في بناء وتشغيل الأنظمة</p>
+            <div class="neon-table-wrapper">
+                <table class="neon-table">
+                    <thead>
+                        <tr>
+                            <th>وجه المقارنة</th>
+                            <th>النموذج التقليدي القديم</th>
+                            <th>نموذج DevOps الحديث</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong style="color: #fff;">سرعة النشر والتحديث</strong></td>
+                            <td style="color: #ff7b72;">بطيئة جداً (مرة كل 3 إلى 6 أشهر)</td>
+                            <td style="color: var(--neon-green); font-weight: 700;">سريعة ومستمرة (عدة مرات يومياً)</td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color: #fff;">طريقة إطلاق التحديث</strong></td>
+                            <td>خطوات يدوية معقدة تكثر فيها الأخطاء البشرية</td>
+                            <td style="color: var(--neon-cyan); font-weight: 700;">أنابيب أتمتة آمنة تلقائية بنسبة 100%</td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color: #fff;">البنية التحتية والخوادم</strong></td>
+                            <td>خوادم ثابتة يصعب تعديلها وتجهيزها</td>
+                            <td style="color: var(--neon-purple); font-weight: 700;">خوادم سحابية مرنة تُدار بالكود (IaC)</td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color: #fff;">التعاون بين الفريق</strong></td>
+                            <td>فرق معزولة وتلاوم عند حدوث مشكلة</td>
+                            <td style="color: var(--neon-green); font-weight: 700;">فريق واحد وتكافؤ في المسئولية والحلول</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Slide 10: DORA Metrics -->
+        <section class="slide">
+            <h1 class="slide-title">مؤشرات الأداء العالمية (DORA Metrics)</h1>
+            <p class="slide-subtitle">المعايير الدولية الأربعة لقياس كفاءة ونجاح فرق الـ DevOps</p>
+            <div class="grid-4">
+                <div class="glass-card">
+                    <div class="card-icon" style="margin-bottom: 12px;">📈</div>
+                    <div class="card-title" style="font-size: 1.1rem; margin-bottom: 8px;">1. تردد النشر</div>
+                    <div class="card-desc" style="font-size: 0.9rem;">Deployment Frequency: كم مرة يتم إطلاق التحديثات في الإنتاج بنجاح.</div>
+                </div>
+                <div class="glass-card purple">
+                    <div class="card-icon" style="color: var(--neon-purple); margin-bottom: 12px;">⏱️</div>
+                    <div class="card-title" style="font-size: 1.1rem; margin-bottom: 8px;">2. زمن قيادة التغييرات</div>
+                    <div class="card-desc" style="font-size: 0.9rem;">Lead Time for Changes: الوقت المستغرق من كتابة الكود إلى تشغيله فعلياً.</div>
+                </div>
+                <div class="glass-card green">
+                    <div class="card-icon" style="color: var(--neon-green); margin-bottom: 12px;">🛠️</div>
+                    <div class="card-title" style="font-size: 1.1rem; margin-bottom: 8px;">3. زمن الاستعادة</div>
+                    <div class="card-desc" style="font-size: 0.9rem;">Time to Restore (MTTR): السرعة في إصلاح واستعادة الخدمة عند العطل.</div>
+                </div>
+                <div class="glass-card" style="border-color: rgba(255, 0, 127, 0.3);">
+                    <div class="card-icon" style="color: var(--neon-pink); margin-bottom: 12px;">🎯</div>
+                    <div class="card-title" style="font-size: 1.1rem; margin-bottom: 8px;">4. معدل فشل التغيير</div>
+                    <div class="card-desc" style="font-size: 0.9rem;">Change Failure Rate: نسبة التحديثات التي تتسبب في أخطاء بالنظام.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 11: Business Value -->
+        <section class="slide">
+            <h1 class="slide-title">الفوائد المباشرة لإدارة الأعمال</h1>
+            <p class="slide-subtitle">تأثير DevOps المباشر على النمو، الربحية، ورضا العملاء</p>
+            <div class="grid-3">
+                <div class="glass-card">
+                    <div class="card-header">
+                        <div class="card-icon">🚀</div>
+                        <div class="card-title">1. سرعة الوصول للسوق</div>
+                    </div>
+                    <div class="card-desc">إسباق المنافسين بإطلاق الميزات البرمجية والتحديثات للعملاء قبل الجميع وبأعلى جودة.</div>
+                </div>
+                <div class="glass-card purple">
+                    <div class="card-header">
+                        <div class="card-icon" style="color: var(--neon-purple);">💰</div>
+                        <div class="card-title">2. تقليل التكاليف</div>
+                    </div>
+                    <div class="card-desc">استغلال أمثل للسيرفرات السحابية وتقليل خسائر التوقف المفاجئ للخدمات عبر الأتمتة.</div>
+                </div>
+                <div class="glass-card green">
+                    <div class="card-header">
+                        <div class="card-icon" style="color: var(--neon-green);">😍</div>
+                        <div class="card-title">3. زيادة رضا العملاء</div>
+                    </div>
+                    <div class="card-desc">تقديم تطبيقات مستقرة بدون انقطاع وتجربة مستخدم سلسة وعالية الجودة بشكل دائم.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 12: Conclusion & Q&A -->
+        <section class="slide">
+            <h1 class="slide-title">الأسئلة والنقاش</h1>
+            <p class="slide-subtitle">DevOps = ثقافة + أتمتة + جودة مستمرة</p>
+            <div class="glass-card green" style="text-align: center; max-width: 700px; margin: 30px auto; padding: 40px;">
+                <div style="font-size: 3rem; margin-bottom: 15px;">💬</div>
+                <div class="card-title" style="font-size: 1.8rem; margin-bottom: 15px; color: var(--neon-green);">شكراً لحسن استماعكم!</div>
+                <div class="card-desc" style="font-size: 1.2rem;">نسعد الآن بتلقي جميع أسئلتكم واستفساراتكم.</div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Navigation Controls Footer -->
+    <footer>
+        <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">السابق ➔</button>
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">التالي ⬅</button>
+    </footer>
+</div>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const slideCounter = document.getElementById('slideCounter');
+    const progressBar = document.getElementById('progressBar');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    function updateSlide() {
+        slides.forEach((slide, index) => {
+            if (index === currentSlide) {
+                slide.classList.add('active');
+            } else {
+                slide.classList.remove('active');
+            }
+        });
+
+        // Update counter formatted with leading zeros
+        const currentFormatted = String(currentSlide + 1).padStart(2, '0');
+        const totalFormatted = String(totalSlides).padStart(2, '0');
+        slideCounter.textContent = `${currentFormatted} / ${totalFormatted}`;
+
+        // Update progress bar
+        const progressPercent = ((currentSlide + 1) / totalSlides) * 100;
+        progressBar.style.width = `${progressPercent}%`;
+
+        // Update buttons state
+        prevBtn.disabled = currentSlide === 0;
+        nextBtn.disabled = currentSlide === totalSlides - 1;
+    }
+
+    function changeSlide(direction) {
+        currentSlide += direction;
+        if (currentSlide < 0) currentSlide = 0;
+        if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
+        updateSlide();
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+            if (currentSlide < totalSlides - 1) changeSlide(1);
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+            if (currentSlide > 0) changeSlide(-1);
+        }
+    });
+
+    // Touch swipe support
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+    });
+
+    document.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    });
+
+    function handleSwipe() {
+        if (touchEndX < touchStartX - 50) {
+            if (currentSlide < totalSlides - 1) changeSlide(1); // Swipe left = next
+        }
+        if (touchEndX > touchStartX + 50) {
+            if (currentSlide > 0) changeSlide(-1); // Swipe right = prev
+        }
+    }
+
+    // Initialize
+    updateSlide();
+</script>
+
+</body>
+</html>
