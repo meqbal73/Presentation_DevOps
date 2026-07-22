@@ -278,7 +278,7 @@
 
         .stat-pink {
             color: var(--neon-pink);
-            text-shadow: 0 0 20px rgba(ff, 0, 127, 0.5);
+            text-shadow: 0 0 20px rgba(255, 0, 127, 0.5);
         }
 
         /* Infinity Loop Concept Visual */
@@ -448,7 +448,7 @@
 
         .progress-bar {
             height: 100%;
-            width: 8.33%;
+            width: 7.69%;
             background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
             transition: width 0.3s ease;
         }
@@ -498,7 +498,7 @@
             <span>عرض DEVOPS البرمجي</span>
             <span class="badge">النيون التفاعلي</span>
         </div>
-        <div class="slide-counter" id="slideCounter">01 / 12</div>
+        <div class="slide-counter" id="slideCounter">01 / 13</div>
     </header>
 
     <!-- Slides Viewport -->
@@ -584,7 +584,71 @@
             </div>
         </section>
 
-        <!-- Slide 4: Automation Metrics -->
+        <!-- Slide 4: NEW SLIDE - Detailed DevOps Lifecycle -->
+        <section class="slide">
+            <h1 class="slide-title">دورة حياة DevOps (DevOps Lifecycle)</h1>
+            <p class="slide-subtitle">المراحل الـ 8 المتتابعة لبناء البرمجيات واختبارها ونشرها بشكل تلقائي ومستمر</p>
+            <div class="grid-4">
+                <div class="glass-card">
+                    <div class="card-header">
+                        <div class="card-icon">📋</div>
+                        <div class="card-title" style="font-size: 1.1rem;">1. التخطيط (Plan)</div>
+                    </div>
+                    <div class="card-desc" style="font-size: 0.9rem;">تحديد المتطلبات، إعداد خارطة الطريق، وقت تقسيم المهام بين فرق التطوير والأعمال.</div>
+                </div>
+                <div class="glass-card">
+                    <div class="card-header">
+                        <div class="card-icon">💻</div>
+                        <div class="card-title" style="font-size: 1.1rem;">2. التكويد (Code)</div>
+                    </div>
+                    <div class="card-desc" style="font-size: 0.9rem;">كتابة الشفرة البرمجية، مراجعتها، وحفظ الإصدارات عبر أنظمة التحكم مثل Git.</div>
+                </div>
+                <div class="glass-card purple">
+                    <div class="card-header">
+                        <div class="card-icon" style="color: var(--neon-purple);">🛠️</div>
+                        <div class="card-title" style="font-size: 1.1rem;">3. البناء (Build)</div>
+                    </div>
+                    <div class="card-desc" style="font-size: 0.9rem;">تجميع الكود والاعتماديات لتحويلها إلى حزمة برمجية جاهزة للعمل.</div>
+                </div>
+                <div class="glass-card purple">
+                    <div class="card-header">
+                        <div class="card-icon" style="color: var(--neon-purple);">🧪</div>
+                        <div class="card-title" style="font-size: 1.1rem;">4. الاختبار (Test)</div>
+                    </div>
+                    <div class="card-desc" style="font-size: 0.9rem;">فحص البرمجية آلياً واكتشاف الأخطاء والثغرات قبل انتقالها للإنتاج.</div>
+                </div>
+                <div class="glass-card green">
+                    <div class="card-header">
+                        <div class="card-icon" style="color: var(--neon-green);">📦</div>
+                        <div class="card-title" style="font-size: 1.1rem;">5. الإصدار (Release)</div>
+                    </div>
+                    <div class="card-desc" style="font-size: 0.9rem;">تجهيز الحزمة المختبرة والمصادقة الفنية لإطلاق الاصدار النهائي.</div>
+                </div>
+                <div class="glass-card green">
+                    <div class="card-header">
+                        <div class="card-icon" style="color: var(--neon-green);">🚀</div>
+                        <div class="card-title" style="font-size: 1.1rem;">6. النشر (Deploy)</div>
+                    </div>
+                    <div class="card-desc" style="font-size: 0.9rem;">رفع التحديثات تلقائياً إلى الخوادم والبيئة السحابية الحية بدون توقف.</div>
+                </div>
+                <div class="glass-card">
+                    <div class="card-header">
+                        <div class="card-icon">⚙️</div>
+                        <div class="card-title" style="font-size: 1.1rem;">7. التشغيل (Operate)</div>
+                    </div>
+                    <div class="card-desc" style="font-size: 0.9rem;">إدارة الخوادم، ضمان استقرار الخدمات، والتعامل مع زيادة الاستخدام.</div>
+                </div>
+                <div class="glass-card">
+                    <div class="card-header">
+                        <div class="card-icon">📊</div>
+                        <div class="card-title" style="font-size: 1.1rem;">8. المراقبة (Monitor)</div>
+                    </div>
+                    <div class="card-desc" style="font-size: 0.9rem;">متابعة الأداء، السجلات الفنية، والملاحظات لإطعام الدورة القادمة بالأفكار.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: Automation Metrics -->
         <section class="slide">
             <h1 class="slide-title">لماذا نحتاج إلى الأتمتة البرمجية؟</h1>
             <p class="slide-subtitle">الأتمتة هي المحرك الأساسي الذي يمنح الشركات السرعة والموثوقية العالية</p>
@@ -602,7 +666,7 @@
             </div>
         </section>
 
-        <!-- Slide 5: CI/CD Pipeline -->
+        <!-- Slide 6: CI/CD Pipeline -->
         <section class="slide">
             <h1 class="slide-title">ما هو خط أنبوب CI/CD Pipeline؟</h1>
             <p class="slide-subtitle">المسار الآلي الذي يعبره الكود من جهاز المبرمج حتى يصل يد المستخدم</p>
@@ -631,7 +695,7 @@
             </div>
         </section>
 
-        <!-- Slide 6: IaC -->
+        <!-- Slide 7: IaC -->
         <section class="slide">
             <h1 class="slide-title">البنية التحتية كأكواد (IaC)</h1>
             <p class="slide-subtitle">إدارة الخوادم والشبكات من خلال ملفات برمجية قابلة للتكرار والتطوير</p>
@@ -662,7 +726,7 @@
             </div>
         </section>
 
-        <!-- Slide 7: DevOps Tools -->
+        <!-- Slide 8: DevOps Tools -->
         <section class="slide">
             <h1 class="slide-title">أشهر الأدوات المستخدمة في DevOps</h1>
             <p class="slide-subtitle">المنظومة التكنولوجية التي تمكّن الأتمتة والسرعة</p>
@@ -694,7 +758,7 @@
             </div>
         </section>
 
-        <!-- Slide 8: DevSecOps -->
+        <!-- Slide 9: DevSecOps -->
         <section class="slide">
             <h1 class="slide-title">الأمان أولاً (DevSecOps)</h1>
             <p class="slide-subtitle">دمج الحماية والأمان كعنصر أساسي في كل مرحلة من مراحل تطوير البرمجيات</p>
@@ -725,7 +789,7 @@
             </div>
         </section>
 
-        <!-- Slide 9: Comparison Table -->
+        <!-- Slide 10: Comparison Table -->
         <section class="slide">
             <h1 class="slide-title">الفرق بين النظام القديم و DevOps</h1>
             <p class="slide-subtitle">مقارنة شمولية تعكس حجم التحول في بناء وتشغيل الأنظمة</p>
@@ -764,7 +828,7 @@
             </div>
         </section>
 
-        <!-- Slide 10: DORA Metrics -->
+        <!-- Slide 11: DORA Metrics -->
         <section class="slide">
             <h1 class="slide-title">مؤشرات الأداء العالمية (DORA Metrics)</h1>
             <p class="slide-subtitle">المعايير الدولية الأربعة لقياس كفاءة ونجاح فرق الـ DevOps</p>
@@ -792,7 +856,7 @@
             </div>
         </section>
 
-        <!-- Slide 11: Business Value -->
+        <!-- Slide 12: Business Value -->
         <section class="slide">
             <h1 class="slide-title">الفوائد المباشرة لإدارة الأعمال</h1>
             <p class="slide-subtitle">تأثير DevOps المباشر على النمو، الربحية، ورضا العملاء</p>
@@ -821,7 +885,7 @@
             </div>
         </section>
 
-        <!-- Slide 12: Conclusion & Q&A -->
+        <!-- Slide 13: Conclusion & Q&A -->
         <section class="slide">
             <h1 class="slide-title">الأسئلة والنقاش</h1>
             <p class="slide-subtitle">DevOps = ثقافة + أتمتة + جودة مستمرة</p>
