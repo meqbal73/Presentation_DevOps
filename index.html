@@ -603,7 +603,7 @@
 
         .progress-bar {
             height: 100%;
-            width: 7.14%;
+            width: 6.66%;
             background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
             transition: width 0.3s ease;
         }
@@ -652,7 +652,7 @@
         <!-- Section Tabs (أقسام العرض) -->
         <div class="sections-bar" id="sectionsBar">
             <button class="section-tag active" onclick="goToSection(0)">القسم 1: الأساسيات والمفهوم</button>
-            <button class="section-tag" onclick="goToSection(1)">القسم 2: الأتمتة والدورة</button>
+            <button class="section-tag" onclick="goToSection(1)">القسم 2: الأتمتة والأدوار</button>
             <button class="section-tag" onclick="goToSection(2)">القسم 3: البنية والأدوات</button>
             <button class="section-tag" onclick="goToSection(3)">القسم 4: الأداء والفوائد</button>
             <button class="section-tag questions-tag" onclick="goToSection(4)">الأسئلة والنقاش 💬</button>
@@ -662,7 +662,7 @@
             <button class="fullscreen-btn" id="fullscreenBtn" onclick="toggleFullscreen()">
                 <span id="fullscreenIcon">⛶</span> <span id="fullscreenText">ملء الشاشة</span>
             </button>
-            <div class="slide-counter" id="slideCounter">01 / 14</div>
+            <div class="slide-counter" id="slideCounter">01 / 15</div>
         </div>
     </header>
 
@@ -677,7 +677,7 @@
         </div>
 
         <!-- ==================== SECTION 1: الأساسيات والمفهوم (1 - 4) ==================== -->
-        <!-- Slide 1: NOW FIRST SLIDE - DevOps Word Breakdown -->
+        <!-- Slide 1: FIRST SLIDE - DevOps Word Breakdown -->
         <section class="slide active" data-section="0">
             <h1 class="slide-title">تفصيل كلمة DevOps</h1>
             <p class="slide-subtitle">تتكون المنهجية من دمج كلمتين أساسيتين لربط عالم التطوير بعالم التشغيل</p>
@@ -709,7 +709,7 @@
             </div>
         </section>
 
-        <!-- Slide 2: NOW SECOND SLIDE - Introduction -->
+        <!-- Slide 2: SECOND SLIDE - Introduction -->
         <section class="slide" data-section="0">
             <h1 class="slide-title">ما هي منهجية DevOps؟</h1>
             <p class="slide-subtitle">دليل مبسط يوضح كيف تدمج الشركات بين التطوير والتشغيل لبناء برمجيات سريعة، خالية من الأخطاء، وآمنة للغاية.</p>
@@ -789,8 +789,47 @@
             </div>
         </section>
 
-        <!-- ==================== SECTION 2: الأتمتة والدورة (5 - 7) ==================== -->
-        <!-- Slide 5 -->
+        <!-- ==================== SECTION 2: الأتمتة والدورة والأدوار (5 - 8) ==================== -->
+
+        <!-- Slide 5-->
+        <section class="slide" data-section="1">
+            <h1 class="slide-title">المسميات التخصصية الحديثة المرتبطة بـ DevOps</h1>
+            <p class="slide-subtitle">أدى اتساع المنهجية إلى ظهور أدوار وظيفية جديدة ومحددة لتسهيل عملية التطوير والتشغيل</p>
+            
+            <div class="grid-3">
+                <div class="glass-card">
+                    <div class="card-header">
+                        <div class="card-icon">🛠️</div>
+                        <div class="card-title" style="font-size: 1.15rem;"><span style="color: var(--neon-cyan);">Platform Engineer</span><br><small style="font-size: 0.85rem; color: var(--text-muted);">(مهندس المنصات)</small></div>
+                    </div>
+                    <div class="card-desc" style="font-size: 0.95rem;">
+                        يركز على بناء منصات الخدمة الذاتية (Internal Developer Platforms) لتسهيل عمل المطورين وتقليل تعقيدات البنية التحتية عنهم.
+                    </div>
+                </div>
+
+                <div class="glass-card purple">
+                    <div class="card-header">
+                        <div class="card-icon" style="color: var(--neon-purple);">☁️</div>
+                        <div class="card-title" style="font-size: 1.15rem;"><span style="color: var(--neon-purple);">Cloud Engineer</span><br><small style="font-size: 0.85rem; color: var(--text-muted);">(مهندس السحابة)</small></div>
+                    </div>
+                    <div class="card-desc" style="font-size: 0.95rem;">
+                        يتخصص في تصميم، إدارة، وتأمين البيئات السحابية (مثل AWS, Azure, GCP) وضمان المرونة وقابلية التوسع والأمان.
+                    </div>
+                </div>
+
+                <div class="glass-card green">
+                    <div class="card-header">
+                        <div class="card-icon" style="color: var(--neon-green);">🏗️</div>
+                        <div class="card-title" style="font-size: 1.15rem;"><span style="color: var(--neon-green);">Infrastructure Engineer</span><br><small style="font-size: 0.85rem; color: var(--text-muted);">(مهندس البنية التحتية)</small></div>
+                    </div>
+                    <div class="card-desc" style="font-size: 0.95rem;">
+                        يتولى بناء وتجهيز الخوادم والشبكات ومكونات النظام الأساسية، سواء في البيئات السحابية أو الخوادم المحلية (On-Premises).
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide 6 -->
         <section class="slide" data-section="1">
             <h1 class="slide-title">دورة حياة DevOps (DevOps Lifecycle)</h1>
             <p class="slide-subtitle">المراحل الـ 8 المتتابعة لبناء البرمجيات واختبارها ونشرها بشكل تلقائي ومستمر</p>
@@ -854,7 +893,7 @@
             </div>
         </section>
 
-        <!-- Slide 6 -->
+        <!-- Slide 7 -->
         <section class="slide" data-section="1">
             <h1 class="slide-title">لماذا نحتاج إلى الأتمتة البرمجية؟</h1>
             <p class="slide-subtitle">الأتمتة هي المحرك الأساسي الذي يمنح الشركات السرعة والموثوقية العالية</p>
@@ -872,7 +911,7 @@
             </div>
         </section>
 
-        <!-- Slide 7 -->
+        <!-- Slide 8 : NEW SLIDE AT END OF SECTION 2 - Modern Job Roles -->
         <section class="slide" data-section="1">
             <h1 class="slide-title">ما هو خط أنبوب CI/CD Pipeline؟</h1>
             <p class="slide-subtitle">المسار الآلي الذي يعبره الكود من جهاز المبرمج حتى يصل يد المستخدم</p>
@@ -901,8 +940,8 @@
             </div>
         </section>
 
-        <!-- ==================== SECTION 3: البنية والأدوات (8 - 10) ==================== -->
-        <!-- Slide 8 -->
+        <!-- ==================== SECTION 3: البنية والأدوات (9 - 11) ==================== -->
+        <!-- Slide 9 -->
         <section class="slide" data-section="2">
             <h1 class="slide-title">البنية التحتية كأكواد (IaC)</h1>
             <p class="slide-subtitle">إدارة الخوادم والشبكات من خلال ملفات برمجية قابلة للتكرار والتطوير</p>
@@ -933,7 +972,7 @@
             </div>
         </section>
 
-        <!-- Slide 9 -->
+        <!-- Slide 10 -->
         <section class="slide" data-section="2">
             <h1 class="slide-title">أشهر الأدوات المستخدمة في DevOps</h1>
             <p class="slide-subtitle">المنظومة التكنولوجية التي تمكّن الأتمتة والسرعة</p>
@@ -965,7 +1004,7 @@
             </div>
         </section>
 
-        <!-- Slide 10 -->
+        <!-- Slide 11 -->
         <section class="slide" data-section="2">
             <h1 class="slide-title">الأمان أولاً (DevSecOps)</h1>
             <p class="slide-subtitle">دمج الحماية والأمان كعنصر أساسي في كل مرحلة من مراحل تطوير البرمجيات</p>
@@ -996,8 +1035,8 @@
             </div>
         </section>
 
-        <!-- ==================== SECTION 4: الأداء والفوائد (11 - 13) ==================== -->
-        <!-- Slide 11 -->
+        <!-- ==================== SECTION 4: الأداء والفوائد (12 - 14) ==================== -->
+        <!-- Slide 12 -->
         <section class="slide" data-section="3">
             <h1 class="slide-title">الفرق بين النظام القديم و DevOps</h1>
             <p class="slide-subtitle">مقارنة شمولية تعكس حجم التحول في بناء وتشغيل الأنظمة</p>
@@ -1036,7 +1075,7 @@
             </div>
         </section>
 
-        <!-- Slide 12 -->
+        <!-- Slide 13 -->
         <section class="slide" data-section="3">
             <h1 class="slide-title">مؤشرات الأداء العالمية (DORA Metrics)</h1>
             <p class="slide-subtitle">المعايير الدولية الأربعة لقياس كفاءة ونجاح فرق الـ DevOps</p>
@@ -1064,7 +1103,7 @@
             </div>
         </section>
 
-        <!-- Slide 13 -->
+        <!-- Slide 14 -->
         <section class="slide" data-section="3">
             <h1 class="slide-title">الفوائد المباشرة لإدارة الأعمال</h1>
             <p class="slide-subtitle">تأثير DevOps المباشر على النمو، الربحية، ورضا العملاء</p>
@@ -1093,8 +1132,8 @@
             </div>
         </section>
 
-        <!-- ==================== SECTION 5: الأسئلة والنقاش (14) ==================== -->
-        <!-- Slide 14 -->
+        <!-- ==================== SECTION 5: الأسئلة والنقاش (15) ==================== -->
+        <!-- Slide 15 -->
         <section class="slide" data-section="4">
             <h1 class="slide-title">الأسئلة والنقاش</h1>
             <p class="slide-subtitle">DevOps = ثقافة + أتمتة + جودة مستمرة</p>
@@ -1129,11 +1168,11 @@
 
     // Slide section mapping (Starts of each section):
     // Section 0: Slides 0,1,2,3 (1-4) -> الأساسيات والمفهوم
-    // Section 1: Slides 4,5,6 (5-7) -> الأتمتة والدورة
-    // Section 2: Slides 7,8,9 (8-10) -> البنية والأدوات
-    // Section 3: Slides 10,11,12 (11-13) -> الأداء والفوائد
-    // Section 4: Slide 13 (14) -> الأسئلة والنقاش
-    const sectionFirstSlideIndex = [0, 4, 7, 10, 13];
+    // Section 1: Slides 4,5,6,7 (5-8) -> الأتمتة والأدوار
+    // Section 2: Slides 8,9,10 (9-11) -> البنية والأدوات
+    // Section 3: Slides 11,12,13 (12-14) -> الأداء والفوائد
+    // Section 4: Slide 14 (15) -> الأسئلة والنقاش
+    const sectionFirstSlideIndex = [0, 4, 8, 11, 14];
 
     function updateSlide() {
         slides.forEach((slide, index) => {
@@ -1204,7 +1243,6 @@
 
     // Screen Click Navigation (Right side = Back, Left side = Forward)
     function handleWrapperClick(e) {
-        // Prevent trigger when clicking interactive elements like buttons
         if (e.target.closest('button') || e.target.closest('.section-tag') || e.target.closest('a')) {
             return;
         }
@@ -1212,19 +1250,16 @@
         const width = window.innerWidth;
         const clickX = e.clientX;
 
-        // Create ripple visual effect at click position
         const ripple = document.createElement('div');
         ripple.className = 'ripple';
         ripple.style.left = `${e.clientX - 25}px`;
         ripple.style.top = `${e.clientY - 25}px`;
 
         if (clickX >= width / 2) {
-            // Clicked Right side -> Back (يرجع)
             ripple.classList.add('back');
             document.body.appendChild(ripple);
             changeSlide(-1);
         } else {
-            // Clicked Left side -> Forward (يقدم)
             document.body.appendChild(ripple);
             changeSlide(1);
         }
@@ -1262,10 +1297,10 @@
 
     function handleSwipe() {
         if (touchEndX < touchStartX - 50) {
-            if (currentSlide < totalSlides - 1) changeSlide(1); // Swipe left = next
+            if (currentSlide < totalSlides - 1) changeSlide(1);
         }
         if (touchEndX > touchStartX + 50) {
-            if (currentSlide > 0) changeSlide(-1); // Swipe right = prev
+            if (currentSlide > 0) changeSlide(-1);
         }
     }
 
