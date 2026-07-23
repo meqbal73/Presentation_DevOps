@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> DevOps </title>
+    <title>عرض DevOps البرمجي النيون التفاعلي - المطور</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Fira+Code:wght@400;600;800&display=swap" rel="stylesheet">
@@ -560,20 +560,32 @@
             z-index: 10;
         }
 
+        /* Bottom Far-Right Movement Control Box */
+        .bottom-movement-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(15, 19, 36, 0.95);
+            border: 1px solid var(--neon-cyan);
+            padding: 6px 14px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.25);
+        }
+
         .nav-btn {
-            background: rgba(0, 243, 255, 0.1);
+            background: rgba(0, 243, 255, 0.12);
             color: var(--neon-cyan);
             border: 1px solid var(--neon-cyan);
-            padding: 8px 22px;
+            padding: 8px 18px;
             border-radius: 8px;
             font-family: var(--font-family);
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.2s ease;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
 
         .nav-btn:hover {
@@ -593,7 +605,7 @@
 
         .progress-bar-container {
             flex: 1;
-            max-width: 380px;
+            max-width: 450px;
             height: 6px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 3px;
